@@ -6,7 +6,7 @@ A self-bootstrapping development environment setup for Railway containers with t
 
 ### One-time setup:
 ```bash
-stty rows 45 cols 193 && apt update && apt install -y curl && curl -s https://raw.githubusercontent.com/Memphizzz/RailwaySetup/refs/heads/main/railway-setup.sh | bash
+stty rows 45 cols 193 && apt update && apt install -y curl && curl -s https://raw.githubusercontent.com/Memphizzz/RailwaySetup/refs/heads/main/railway-setup.sh -o /tmp/setup.sh && bash /tmp/setup.sh && rm /tmp/setup.sh && /app/storage/init
 ```
 
 ### Subsequent connections:
@@ -18,7 +18,8 @@ stty rows 45 cols 193 && apt update && apt install -y curl && curl -s https://ra
 
 The bootstrap script automatically:
 
-- **Installs essential packages**: tmux, fish, btop, ripgrep, ncdu, exa, nano, wget
+- **Installs essential packages**: tmux, fish, btop, ripgrep, ncdu, nano, wget
+- **Installs eza**: Modern `ls` replacement downloaded from GitHub releases
 - **Configures UTF-8 locale** for proper character support
 - **Sets up tmux** with a custom configuration including mouse support and statusbar
 - **Configures fish shell** with useful aliases (`ll`, `lls`, `ls` → `exa`)
@@ -37,7 +38,7 @@ The bootstrap script automatically:
 ### Fish Shell Aliases
 - `ll` - Detailed listing with colors and directories first
 - `lls` - Detailed listing sorted by size
-- `ls` - Modern `exa` replacement for traditional `ls`
+- `ls` - Modern `eza` replacement for traditional `ls`
 
 ### Smart Session Management
 The `/app/storage/init` script automatically:
@@ -62,7 +63,7 @@ This setup addresses several Railway SSH implementation quirks:
 
 ## Workflow
 
-1. **First connection**: Run the one-liner bootstrap command
+1. **First connection**: Run the one-liner bootstrap command (downloads script, runs it, cleans up temp file, and starts tmux)
 2. **Future connections**: Simply run `/app/storage/init`
 3. **Container recreation**: `/app/storage/init` detects missing setup and re-bootstraps automatically
 
@@ -80,4 +81,3 @@ Edit the script variables to customize:
 - **Self-healing**: Automatically detects and fixes broken setups
 - **Minimal**: One command gets you a full development environment
 - **Railway-optimized**: Specifically designed for Railway's SSH quirks
-

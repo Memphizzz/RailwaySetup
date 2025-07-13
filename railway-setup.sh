@@ -109,5 +109,3 @@ chmod +x /app/storage/init
 touch ~/.init
 
 echo "Bootstrap setup completed!"
-sleep 3
-exec /app/storage/init
