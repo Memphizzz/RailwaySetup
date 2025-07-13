@@ -7,13 +7,16 @@ if [ -f ~/.init ]; then
 fi
 
 # Update packages and install required tools
-apt update && apt install -y wget tmux fish btop locales ripgrep ncdu exa nano
+echo "Installing Tools"
+apt install -y wget tmux fish btop locales ripgrep ncdu eza nano
 
 # Generate UTF-8 locale
+echo "Generating Locale en_US.UTF-8"
 echo "en_US.UTF-8 UTF-8" > /etc/locale.gen
 locale-gen
 
 # Create tmux configuration
+echo "Creating .tmux.conf"
 cat > ~/.tmux.conf << 'TMUX_EOF'
 set -g mouse on
 
@@ -56,14 +59,24 @@ if-shell "test -f /usr/bin/fish" "set -g default-shell /usr/bin/fish"
 TMUX_EOF
 
 # Create fish configuration
+echo "Creating Fish config"
 mkdir -p ~/.config/fish
 cat > ~/.config/fish/config.fish << 'FISH_EOF'
 alias ll 'ls -lah --color=always --group-directories-first'
 alias lls 'ls -lahSr --color=always --group-directories-first'
-alias ls exa
+alias ls eza
 FISH_EOF
 
+# Configure btop - start it briefly to generate config, then modify settings
+echo "Creating btop config"
+timeout 2s btop > /dev/null 2>&1 || true
+if [ -f ~/.config/btop/btop.conf ]; then
+    sed -i 's/theme_background = True/theme_background = False/' ~/.config/btop/btop.conf
+    sed -i 's/proc_gradient = True/proc_gradient = False/' ~/.config/btop/btop.conf
+fi
+
 # Create the persistent init script
+echo "Creating /app/storage/init script"
 cat > /app/storage/init << 'INIT_SCRIPT'
 #!/bin/bash
 GIST_URL="https://raw.githubusercontent.com/Memphizzz/RailwaySetup/refs/heads/main/railway-setup.sh"
