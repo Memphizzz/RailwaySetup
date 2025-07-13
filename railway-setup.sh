@@ -63,6 +63,13 @@ alias lls 'ls -lahSr --color=always --group-directories-first'
 alias ls exa
 FISH_EOF
 
+# Configure btop - start it briefly to generate config, then modify settings
+timeout 2s btop > /dev/null 2>&1 || true
+if [ -f ~/.config/btop/btop.conf ]; then
+    sed -i 's/theme_background = True/theme_background = False/' ~/.config/btop/btop.conf
+    sed -i 's/proc_gradient = True/proc_gradient = False/' ~/.config/btop/btop.conf
+fi
+
 # Create the persistent init script
 cat > /app/storage/init << 'INIT_SCRIPT'
 #!/bin/bash
@@ -89,4 +96,3 @@ chmod +x /app/storage/init
 touch ~/.init
 
 echo "Bootstrap setup completed!"
-
