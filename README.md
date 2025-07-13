@@ -6,7 +6,7 @@ A self-bootstrapping development environment setup for Railway containers with t
 
 ### One-time setup:
 ```bash
-stty rows 45 cols 193 && apt update && apt install -y curl && curl -s https://raw.githubusercontent.com/yourusername/yourrepo/main/railway-setup.sh | bash
+stty rows 45 cols 193 && apt update && apt install -y curl && curl -s https://raw.githubusercontent.com/Memphizzz/RailwaySetup/refs/heads/main/railway-setup.sh | bash
 ```
 
 ### Subsequent connections:
@@ -80,3 +80,4 @@ Edit the script variables to customize:
 - **Self-healing**: Automatically detects and fixes broken setups
 - **Minimal**: One command gets you a full development environment
 - **Railway-optimized**: Specifically designed for Railway's SSH quirks
+

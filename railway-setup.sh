@@ -66,7 +66,7 @@ FISH_EOF
 # Create the persistent init script
 cat > /app/storage/init << 'INIT_SCRIPT'
 #!/bin/bash
-GIST_URL="https://gist.githubusercontent.com/Memphizzz/6c1a942944fcd8df01f45649b2ec57e1/raw/76c3a6b25d0340644a3e7d096eb0d2c43110f516/railway-setup.sh"
+GIST_URL="https://raw.githubusercontent.com/Memphizzz/RailwaySetup/refs/heads/main/railway-setup.sh"
 
 if [ -f ~/.init ]; then
     stty rows 45 cols 193
@@ -89,3 +89,4 @@ chmod +x /app/storage/init
 touch ~/.init
 
 echo "Bootstrap setup completed!"
+
