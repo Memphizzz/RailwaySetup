@@ -8,7 +8,14 @@ fi
 
 # Update packages and install required tools
 echo "Installing Tools"
-apt install -y wget tmux fish btop locales ripgrep ncdu eza nano
+apt install -y wget tmux fish btop locales ripgrep ncdu nano
+
+# Install eza from GitHub releases
+echo "Installing eza"
+wget -c https://github.com/eza-community/eza/releases/latest/download/eza_x86_64-unknown-linux-gnu.tar.gz -O - | tar xz
+chmod +x eza
+chown root:root eza
+mv eza /usr/local/bin/eza
 
 # Generate UTF-8 locale
 echo "Generating Locale en_US.UTF-8"
